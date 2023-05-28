@@ -24,7 +24,13 @@
             <div class="container">
                 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
                 <a class="navbar-brand" href="{% url 'lista_articulo' %}">Articulos</a>
-                <a class="navbar-brand" href="{% url 'lista_estudiantes' %}">Estudiantes</a>
+                <a class="navbar-brand" href="{% url 'about' %}">Acerca de mi</a>
+
+                <!--Página about: “Acerca de mi”
+En donde se contará acerca del creador/a de la página
+Ruta about/
+Agregar foto del creador/a (opcional)-->
+
                 {% if user.is_authenticated %}
                 {% if user.avatar %}
                     <img src="{{ user.avatar.imagen.url }}" alt="User Avatar" class="mr-2 rounded-circle" style="width: 30px; height: 30px; margin-left: -100px;">
@@ -54,7 +60,7 @@
                 </div>
                 {% else %}
                 <a class="btn btn-primary" href="{% url 'login' %}">Iniciar sesión</a>
-                <a class="btn btn-success" href="{% url 'registro' %}">Crear nueva cuenta</a>
+                <a class="btn btn-success" href="{% url 'registro' %}" style="margin-left: -210px;">Crear cuenta</a>
                 {% endif %}
             </div>
         </nav>

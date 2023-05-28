@@ -28,6 +28,7 @@ def registro(request):
     )
 
 
+
 def login_view(request):
     next_url = request.GET.get('next')
     if request.method == "POST":
@@ -38,13 +39,10 @@ def login_view(request):
             usuario = data.get('username')
             password = data.get('password')
             user = authenticate(username=usuario, password=password)
-            # user puede ser un usuario o None
+
             if user:
                 login(request=request, user=user)
-                if next_url:
-                    return redirect(next_url)
-                url_exitosa = reverse('inicio')
-                return redirect(url_exitosa)
+                return redirect('inicio')  # Redirect to the 'inicio' page
     else:  # GET
         form = AuthenticationForm()
     return render(
@@ -66,22 +64,25 @@ class MiPerfilUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
-
 def agregar_avatar(request):
+    try:
+        avatar = request.user.avatar
+    except Avatar.DoesNotExist:
+        avatar = None
+
     if request.method == "POST":
-        formulario = AvatarFormulario(request.POST, request.FILES) # Aquí me llega toda la info del formulario html
+        formulario = AvatarFormulario(request.POST, request.FILES, instance=avatar)
 
         if formulario.is_valid():
-            avatar = formulario.save()
+            avatar = formulario.save(commit=False)
             avatar.user = request.user
             avatar.save()
             url_exitosa = reverse('inicio')
             return redirect(url_exitosa)
     else:  # GET
-        formulario = AvatarFormulario()
+        formulario = AvatarFormulario(instance=avatar)
     return render(
         request=request,
         template_name="perfiles/formulario_avatar.html",
-        context={'form': formulario},
+        context={'formulario': formulario},
     )
-

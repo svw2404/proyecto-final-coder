@@ -63,6 +63,10 @@
   --bs-body-bg: #fff;
 }
 
+.search-bar-container {
+  text-align: right;
+  margin-right: 20px; /* Adjust the margin as needed */
+}
 *,
 *::before,
 *::after {
@@ -74,7 +78,63 @@
     scroll-behavior: smooth;
   }
 }
+.toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: purple;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  opacity: 0;
+  animation-name: fade-in;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  z-index: 9999; /* Set a high z-index value to ensure it appears on top */
+}
+.ver-mas-link {
+  display: none;
+  color: blue;
+}
 
+.custom-button:hover {
+  background-color: gray;
+}
+
+.custom-button {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  transition: background-color 0.3s ease;
+  border: none;
+  padding: 0;
+}
+
+
+.button-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.image {
+  width: 50px;
+  height: 50px;
+}
+
+.text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -4069,7 +4129,10 @@ textarea.form-control-lg {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
-
+.custom-container {
+  background-color: black;
+  
+}
 .navbar-collapse {
   flex-basis: 100%;
   flex-grow: 1;
@@ -4160,6 +4223,7 @@ textarea.form-control-lg {
     border-top: 0;
     border-bottom: 0;
   }
+  
   .navbar-expand-sm .offcanvas-body {
     display: flex;
     flex-grow: 0;
@@ -4379,6 +4443,15 @@ textarea.form-control-lg {
     overflow-y: visible;
   }
 }
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+}
+
 .navbar-expand {
   flex-wrap: nowrap;
   justify-content: flex-start;
@@ -4533,6 +4606,11 @@ textarea.form-control-lg {
 .card > .card-header + .list-group,
 .card > .list-group + .card-footer {
   border-top: 0;
+}
+.footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 .card-body {
@@ -6887,6 +6965,12 @@ textarea.form-control-lg {
 .border-info {
   border-color: #0dcaf0 !important;
 }
+.comment {
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
 
 .border-warning {
   border-color: #ffc107 !important;

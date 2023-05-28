@@ -1,0 +1,33 @@
+{% extends "control_estudios/base.html" %}
+
+{% block contenido %}
+<h2>Edición de Articulo</h2>
+<br><form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="{{ formulario.titulo.id_for_label }}"><b>Título</b></label><br>
+    {{ formulario.titulo }}
+    {{ formulario.titulo.errors }}
+  </div><br>
+  <div class="form-group">
+    <label for="{{ formulario.subtitulo.id_for_label }}"><b>Subtítulo</b></label><br>
+    {{ formulario.subtitulo }}
+    {{ formulario.subtitulo.errors }}
+  </div><br>
+  <div class="form-group">
+    <label for="{{ formulario.cuerpo.id_for_label }}"><b>Cuerpo</b></label><br>
+    {{ formulario.cuerpo }}
+    {{ formulario.cuerpo.errors }}
+  </div><br>
+  <div class="form-group">
+    <label for="{{ formulario.imagen.id_for_label }}"><b>Imagen Anterior:</b></label>
+    {% if formulario.imagen.value %}
+      <span>{{ formulario.imagen.value }}</span>
+    {% else %}
+      <span>No se eligió ningún archivo</span>
+    {% endif %}<br>
+    <input type="file" name="{{ formulario.imagen.name }}" id="{{ formulario.imagen.id_for_label }}" class="{{ formulario.imagen.css_classes }}" accept="image/*">
+  </div><br>
+  <input type="submit" value="Enviar" class="btn btn-primary" />
+</form>
+{% endblock contenido %}

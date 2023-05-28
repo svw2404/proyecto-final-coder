@@ -26,11 +26,12 @@ from sistema_coder.views import saludar, saludar_con_fecha, saludar_a_usuario,\
 urlpatterns = [
     path("", inicio, name="inicio"),
     path("admin/", admin.site.urls),
-    path("estudios/", include("control_estudios.urls")),
+    path("articulo/", include("control_estudios.urls")),
     path("perfiles/", include("perfiles.urls")),
     path("saludo/", saludar),
     path("saludo-hoy/", saludar_con_fecha),
     path("saludo-html/", saludar_con_html),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

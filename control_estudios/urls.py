@@ -17,18 +17,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from control_estudios.views import listar_cursos, crear_curso, buscar_cursos,\
-    eliminar_curso, editar_curso, EstudianteListView, EstudianteCreateView,\
+from control_estudios.views import listar_articulo, eliminar_comentario, crear_articulo, crear_comentario, buscar_articulo,\
+    eliminar_articulo, editar_articulo, ver_mas, EstudianteListView, EstudianteCreateView,\
     EstudianteDetailView, EstudianteUpdateView, EstudianteDeleteView
 
 
 urlpatterns = [
     # URLS de cursos
-    path("cursos/", listar_cursos, name="lista_cursos"),
-    path("crear-curso/", crear_curso, name="crear_curso"),
-    path("buscar-cursos/", buscar_cursos, name="buscar_cursos"),
-    path("eliminar-curso/<int:id>/", eliminar_curso, name="eliminar_curso"),
-    path("editar-curso/<int:id>/", editar_curso, name="editar_curso"),
+    path("articulo/", listar_articulo, name="lista_articulo"),
+    path("crear-articulo/", crear_articulo, name="crear_articulo"),
+    path("buscar-articulo/", buscar_articulo, name="buscar_articulo"),
+    path("eliminar-articulo/<int:id>/", eliminar_articulo, name="eliminar_articulo"),
+    path("editar-articulo/<int:id>/", editar_articulo, name="editar_articulo"),
+    path("ver-mas/<int:id>/", ver_mas, name="ver_mas"),
+    path("crear_comentario/<int:id>/", crear_comentario, name="crear_comentario"),
+    path("eliminar-comentario/<int:id_comentario>/<int:id_articulo>/", eliminar_comentario, name="eliminar_comentario"),
     # URLS de estudiantes
     path("estudiantes/", EstudianteListView.as_view(), name="lista_estudiantes"),
     path('estudiantes/<int:pk>/', EstudianteDetailView.as_view(), name="ver_estudiante"),

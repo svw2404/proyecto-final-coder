@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -16,19 +15,24 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/dist/toastify.min.css"/>
     </head>
 
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-light bg-light static-top">
+        <nav class="navbar navbar-dark bg-dark static-top">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
-                <a class="navbar-brand" href="{% url 'lista_cursos' %}">Cursos</a>
+                <a class="navbar-brand" href="{% url 'lista_articulo' %}">Articulos</a>
                 <a class="navbar-brand" href="{% url 'lista_estudiantes' %}">Estudiantes</a>
                 {% if user.is_authenticated %}
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.imagen.url }}" alt="User Avatar" class="mr-2 rounded-circle" style="width: 30px; height: 30px; margin-left: -100px;">
+                {% else %}
+                    <img src="/media/avatares/default.jpg" alt="Default Avatar" class="mr-2 rounded-circle" style="width: 30px; height: 30px; margin-left: -100px;">
+                {% endif %}
+                <div class="dropdown" style="margin-left: -315px;">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: inherit; border: none;">
                         <div style="display: inline-flex;">
                             <span>{{ user.username }}</span>
                         </div>
@@ -37,9 +41,11 @@
                         <li>
                             <a class="dropdown-item" href="{% url 'editar_perfil' %}">Editar mis datos</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="{% url 'agregar_avatar' %}">Agregar avatar</a>
-                        </li>
+                            {% if user.avatar %}                            
+                                <li><a class="dropdown-item" href="{% url 'agregar_avatar' %}">Cambiar avatar</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="{% url 'agregar_avatar' %}">Agregar avatar</a></li>
+                            {% endif %}        
                         <li>
                             <a class="dropdown-item" href="{% url 'logout' %}"><strong>Cerrar Sesión</strong></a>
                         </li>
@@ -59,25 +65,25 @@
         </section>
 
         <!-- Footer-->
-        <footer class="footer bg-light">
+        <footer class="bg-light" style="margin-top: 150px; margin-left: 137px; margin-right: 115px; margin-bottom: 130px;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                         <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a href="#!">Ayuda</a></li>
+                            <li class="list-inline-item"><a href="https://api.whatsapp.com/send?phone=595991459016" target="_blank">Ayuda</a></li>
                             <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Contacto</a></li>
+                            <li class="list-inline-item"><a href="https://api.whatsapp.com/send?phone=595991459016" target="_blank">Contacto</a></li>
                       
                         </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy; Curso de Python - CoderHouse.</p>
+                        <p class="text-muted small mb-4 mb-lg-0">&copy; Sebastian Vallejos.</p>
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item me-4">
-                                <a href="https://twitter.com/coderhouse"><i class="bi-twitter fs-3"></i></a>
+                                <a href="https://twitter.com/VallejosSebas"><i class="bi-twitter fs-3"></i></a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="https://www.instagram.com/coderhouse/?hl=es"><i class="bi-instagram fs-3"></i></a>
+                                <a href="https://www.instagram.com/_sebasvallejos/?hl=es"><i class="bi-instagram fs-3"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -96,4 +102,5 @@
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
     </body>
+    
 </html>

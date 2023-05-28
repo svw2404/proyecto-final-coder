@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from datetime import date
 
 class Curso(models.Model):
     nombre = models.CharField(max_length=64)  # Equivalente de str
@@ -45,3 +45,19 @@ class Entregable(models.Model):
     nombre = models.CharField(max_length=256)
     fecha_entrega = models.DateTimeField(auto_now_add=True)
     esta_aprobado = models.BooleanField(default=False)  # equivalente a bool (True, False)
+
+
+
+class Articulo(models.Model):
+    titulo = models.CharField(max_length=256)
+    subtitulo = models.CharField(max_length=256)
+    cuerpo = models.TextField()
+    autor = models.CharField(max_length=64)
+    fecha = models.DateField(default=date.today)
+    imagen = models.ImageField(upload_to='articulos', null=True, blank=True)
+
+class Comentario(models.Model):
+    articulo_id = models.IntegerField()
+    comentador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    cuerpo = models.TextField()
+    fecha = models.DateField(default=date.today)

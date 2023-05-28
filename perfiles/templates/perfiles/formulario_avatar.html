@@ -1,10 +1,21 @@
 {% extends "control_estudios/base.html" %}
 
 {% block contenido %}
-<h3>Subir tu Avatar</h3>
+<h3>Subir tu Avatar</h3><br>
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Subir imagen"/>
+  <div class="form-group">
+    <label for="{{ formulario.imagen.id_for_label }}"><b>Imagen Anterior:</b></label>
+    {% if formulario.imagen.value %}
+      <span>{{ formulario.imagen.value }}</span>
+    {% else %}
+      <span>No se había eligido ningún archivo antes</span>
+    {% endif %}<br>
+    <input type="file" name="{{ formulario.imagen.name }}" id="{{ formulario.imagen.id_for_label }}" class="{{ formulario.imagen.css_classes }}" accept="image/*">
+  </div><br>
+  <input type="submit" value="Enviar" class="btn btn-primary" />
 </form>
 {% endblock contenido %}
+
+
+

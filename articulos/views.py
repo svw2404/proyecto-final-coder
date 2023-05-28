@@ -34,7 +34,7 @@ def editar_articulo(request, id):
         formulario = ArticuloFormulario(initial=inicial)
     return render(
         request=request,
-        template_name='control_estudios/formulario_articulo.html',
+        template_name='articulos/formulario_articulo.html',
         context={'formulario': formulario},
     )
 
@@ -58,7 +58,7 @@ def crear_articulo(request):
         formulario = ArticuloFormulario()
     http_response = render(
         request=request,
-        template_name='control_estudios/formulario_articulo.html',
+        template_name='articulos/formulario_articulo.html',
         context={'formulario': formulario}
     )
     return http_response
@@ -78,7 +78,7 @@ def listar_articulo(request):
 
     http_response = render(
         request=request,
-        template_name='control_estudios/lista_articulo.html',
+        template_name='articulos/lista_articulo.html',
         context=contexto,
     )
     return http_response
@@ -107,7 +107,7 @@ def ver_mas(request, id):
     }
     return render(
         request=request,
-        template_name='control_estudios/ver_mas.html',
+        template_name='articulos/ver_mas.html',
         context=contexto,
     )
 
@@ -123,7 +123,7 @@ def buscar_articulo(request):
         }
         http_response = render(
             request=request,
-            template_name='control_estudios/lista_articulo.html',
+            template_name='articulos/lista_articulo.html',
             context=contexto,
         )
         return http_response
@@ -147,7 +147,7 @@ def crear_comentario(request, id):
 
     http_response = render(
         request=request,
-        template_name='control_estudios/ver_mas.html',
+        template_name='articulos/ver_mas.html',
         context={'formulario': formulario}
     )
     return http_response

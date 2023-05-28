@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+import os
+from django.conf import settings
 from articulos.forms import ArticuloFormulario, ComentarioFormulario
 from articulos.models import Articulo, Comentario
 
@@ -65,11 +66,20 @@ def crear_articulo(request):
 
 @login_required
 def eliminar_articulo(request, id):
-    articulo = Articulo.objects.get(id=id)
+    articulo = get_object_or_404(Articulo, id=id)
+    
     if request.method == "POST":
+        if articulo.imagen:
+            image_path = os.path.join(settings.MEDIA_ROOT, articulo.imagen.name)
+            if os.path.exists(image_path):
+                os.remove(image_path)
+        
         articulo.delete()
+        
         url_exitosa = reverse('lista_articulo')
         return redirect(url_exitosa)
+    
+    return render(request, 'eliminar_articulo.html', {'articulo': articulo})
 
 def listar_articulo(request):
     contexto = {

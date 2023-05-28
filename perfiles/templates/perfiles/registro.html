@@ -1,6 +1,8 @@
-{% extends "control_estudios/base.html" %}
+{% extends "articulos/base.html" %}
 
 {% block contenido %}
+<h2>Registrarse</h2>
+<br>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}

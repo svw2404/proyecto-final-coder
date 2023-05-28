@@ -17,7 +17,7 @@ def registro(request):
 
         if formulario.is_valid():
             formulario.save()  # Esto lo puedo usar porque es un model form
-            url_exitosa = reverse('inicio')
+            url_exitosa = reverse('home')
             return redirect(url_exitosa)
     else:  # GET
         formulario = UserRegisterForm()
@@ -42,8 +42,8 @@ def login_view(request):
 
             if user:
                 login(request=request, user=user)
-                return redirect('inicio')  # Redirect to the 'inicio' page
-    else:  # GET
+                return redirect('home')  
+    else:  
         form = AuthenticationForm()
     return render(
         request=request,
@@ -58,7 +58,7 @@ class CustomLogoutView(LogoutView):
 
 class MiPerfilUpdateView(LoginRequiredMixin, UpdateView):
     form_class = UserUpdateForm
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('home')
     template_name = 'perfiles/formulario_perfil.html'
 
     def get_object(self, queryset=None):
@@ -77,7 +77,7 @@ def agregar_avatar(request):
             avatar = formulario.save(commit=False)
             avatar.user = request.user
             avatar.save()
-            url_exitosa = reverse('inicio')
+            url_exitosa = reverse('home')
             return redirect(url_exitosa)
     else:  # GET
         formulario = AvatarFormulario(instance=avatar)

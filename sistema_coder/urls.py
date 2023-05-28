@@ -19,18 +19,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from sistema_coder.views import saludar, saludar_con_fecha, saludar_a_usuario,\
-    saludar_con_html, inicio
+from sistema_coder.views import home, about
 
 
 urlpatterns = [
-    path("", inicio, name="inicio"),
+    path("", home, name="home"),
+    path("about/", about, name="about"),
     path("admin/", admin.site.urls),
-    path("articulo/", include("control_estudios.urls")),
-    path("perfiles/", include("perfiles.urls")),
-    path("saludo/", saludar),
-    path("saludo-hoy/", saludar_con_fecha),
-    path("saludo-html/", saludar_con_html),
+    path("articulo/", include("articulos.urls")),
+    path("perfiles/", include("perfiles.urls"))
 ]
 
 if settings.DEBUG:

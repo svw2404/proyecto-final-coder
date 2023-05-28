@@ -6,11 +6,6 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
-class CursoFormulario(forms.Form):
-    nombre = forms.CharField(required=True, max_length=64) 
-    comision = forms.IntegerField(required=True, max_value=50000)
-
-
 class ArticuloFormulario(forms.ModelForm):
     titulo = forms.CharField(required=True, max_length=256, widget=forms.Textarea(attrs={'rows': 1,'style': 'width: 800px;'}))
     subtitulo = forms.CharField(required=True, max_length=256, widget=forms.Textarea(attrs={'rows': 2,'style': 'width: 800px;'}))
